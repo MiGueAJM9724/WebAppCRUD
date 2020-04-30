@@ -121,3 +121,38 @@ function Delete_Departament($post){
     $sentence = "DELETE FROM ventas.departamento WHERE iddepto=$id";
     return Execute($sentence);
 }
+
+/*
+  Sucursal
+*/
+
+function Select_Sucursal()
+{
+    $query = "SELECT A.idsuc, A.nomsuc, A.cp, A.idreg, B.nomreg FROM ventas.sucursal A INNER JOIN ventas.region B ON (A.idreg = B.idreg) ORDER BY nomsuc";
+    return Query($query);
+}
+
+function Insert_Sucursal(&$post){
+    $name = $post['name_sucursal'];
+    $cp = $post['cp'];
+    $id_region = $post['id_region'];
+    $sentence = "INSERT INTO ventas.sucursal(nomdepto, cp, idreg) VALUES('$name', '$cp', '$id_region') RETURNING idsuc";
+    $id = Execute_Consecutively($sentence,"iddepto");
+    $post['id_departament']=$id;
+    return $id;
+}
+
+function Update_Sucursal($post){
+    $id = $post['id_sucursal'];
+    $name = $post['name_sucursal'];
+    $cp = $post['cp'];
+    $id_region['id_region'];
+    $sentence = "UPDATE ventas.sucursal SET nomsuc = '$name', cp = '$cp', idreg = '$id_region' WHERE idsuc=$id";
+    return Execute($sentence);
+}
+
+function Delete_Sucursal($post){
+    $id = $post['id_sucursal'];
+    $sentence = "DELETE FROM ventas.sucursal WHERE idsuc=$id";
+    return Execute($sentence);
+}

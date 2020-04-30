@@ -2,7 +2,7 @@
     include_once("../utilities/dataBase.php");
 
     $post = $_POST;
-    $result = Update_Region($post);
+    $result = Update_Sucursal($post);
     if($result){
         $response["status"] = 1;
         $response["data"]= $post;

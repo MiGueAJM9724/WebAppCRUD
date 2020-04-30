@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Region-Template</title>
+    <title>Sucursal-Template</title>
     <!-- Importa librerias de estilos de Materialize, DataTable e Iconos -->
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="../css/dataTables.materialize.css"/>
@@ -25,28 +25,44 @@
            </a>
            <div class="card-content">
               <span><h3>Regions</h3></span>
-              <div id="table_region">
-              
+              <div id="table_sucursal">
+
               </div>
            </div>
        </div>
     </div>
 </div>
-<div class="modal" id="modal_region">
+<div class="modal" id="modal_sucursal">
     <div class="modal-content">
-         <h4>CRUD Regions</h4>
+         <h4>CRUD Sucursal</h4>
          <br>
-         <form id="form_region" method="POST">
+         <form id="form_sucursal" method="POST">
               <div class="row">
                   <div class="input-field col s12">
-                      <input type="hidden" id="id_region" name="id_region">
+                      <input type="hidden" id="id_sucursal" name="id_sucursal">
                   </div>
               </div>
               <div class="row">
                    <div class="input-field col s12">
-                        <input type="text" id="name_region" name="name_region" class="validate">
-                        <label for="name_region">Name to the region:</label>
+                        <input type="text" id="name_sucursal" name="name_sucursal" class="validate">
+                        <label for="name_sucursal">Name to the sucursal:</label>
                    </div>
+              </div>
+              <div class="row">
+                   <div class="input-field col s12">
+                        <input type="text" id="cp" name="cp" class="validate">
+                        <label for="cp">Postal code:</label>
+                   </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s12">
+                      <select name='id_region' id='id_region' class='validate'>
+                          <?php
+                                include_once('queryselect.php');
+                          ?>
+                      </select>
+                      <label class='active' for="id_region">Region</label>
+                  </div>
               </div>
          </form>
     </div>

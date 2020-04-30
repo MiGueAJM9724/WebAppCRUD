@@ -2,7 +2,7 @@
     include_once("../utilities/dataBase.php");
 
     $post = $_POST;
-    $result = Delete_Region($post);
+    $result = Delete_Sucursal($post);
     if($result){
         $response["status"] = 1;
         $response["data"]= $post;
