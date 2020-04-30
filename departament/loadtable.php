@@ -1,8 +1,8 @@
 <?php
-    include_once("../utilities/dataBase.php");
+    include_once("../utilities/database.php");
 
     $tuplas = Select_Departament();
-    //var_dump($tuplas); 
+    //var_dump($tuplas);
     echo "<table id='table' class='highlight responsive-table'>
     <thead><tr><th>Name of the departament</th><th>Edit / Delete</th></tr></thead>
     <tbody>";
