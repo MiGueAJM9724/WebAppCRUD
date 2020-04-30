@@ -1,5 +1,5 @@
 <?php
-    include_once("../utilities/dataBase.php");
+    include_once("../utilities/database.php");
 
     $post = $_POST;
     $result = Insert_Sucursal($post);

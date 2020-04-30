@@ -24,7 +24,7 @@
               <i class="material-icons">add</i>
            </a>
            <div class="card-content">
-              <span><h3>Regions</h3></span>
+              <span><h3>Sucursal</h3></span>
               <div id="table_sucursal">
 
               </div>
