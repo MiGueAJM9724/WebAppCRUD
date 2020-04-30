@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
     if  (!isset($_SESSION)){
       session_start();
       $corr = "";
@@ -27,7 +27,7 @@
           if ($corr == "")
              echo "<li><a href='../Acceso/''>Iniciar sesión</a></li>";
           else
-             echo "<li><a href='../Acceso/destruir.php''>$corr(Cerrar)</a></li>";
+             echo "<li><a href='../Acceso/destruir.php>$corr(Cerrar)</a></li>";
       ?>
     </ul>
   </div>
@@ -51,6 +51,5 @@
     <li><a href="collapsible.html">JavaScript</a></li>
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        
-</header>
 
+</header>
