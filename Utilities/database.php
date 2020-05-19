@@ -1,12 +1,12 @@
 <?php
 /*
-  DataBase utilities 
+  DataBase utilities
   Jimenez Melendez Miguel Angel
   Enero 2020
 */
 // this is a conection with DataBase PostgreSQL
 try{
-    $Cn = new PDO('pgsql:host=localhost;port=5432;dbname=negocios;user=postgres;password=972402');
+    $Cn = new PDO('pgsql:host=localhost;port=5432;dbname=Negocios;user=postgres;password=972402');
     //$Cn = new PDO('mysql:host=localhost; dbname=bdalumnos','root','');
     $Cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $Cn->exec("SET CLIENT_ENCODING TO 'UTF8';");
@@ -195,4 +195,35 @@ function Delete_Product($post){
     $id = $post['id_product'];
     $sentence = "DELETE FROM ventas.producto WHERE idprod=$id";
     return Execute($sentence);
+}
+/*
+Chart Region
+*/
+function Load_Sale_Region($id_region){
+    $query = "SELECT A.nomsuc x,sum(B.importe) y FROM ventas.sucursal A ".
+    "INNER JOIN ventas.detalleventa B ON (A.idsuc = B.idsuc) WHERE A.idreg =".
+    " $id_region GROUP BY A.nomsuc";
+    return Query($query);
+}
+
+function Load_All_Region(){
+    $query = "SELECT C.nomreg x,sum(B.importe) y FROM ventas.sucursal A ".
+    "INNER JOIN ventas.detalleventa B on (A.idsuc = B.idsuc) INNER JOIN ".
+    "ventas.region C on (A.idreg = C.idreg)   GROUP BY C.nomreg";
+    return Query($query);
+}
+/*
+Chart departament
+*/
+function Load_Sale_Departament($id_departament){
+    $query = "SELECT A.nomprod x, sum(B.importe) y FROM ventas.producto A ".
+    "INNER JOIN ventas.detalleventa B ON (A.idprod = B.idprod) WHERE A.iddepto=".
+    "$id_departament GROUP BY A.nomprod";
+    return Query($query);
+}
+function Load_All_Departament(){
+  $query = "SELECT C.nomdepto x,sum(B.importe) y FROM ventas.producto A ".
+  "INNER JOIN ventas.detalleventa B ON (A.idprod = B.idprod) INNER JOIN ".
+  "ventas.departamento C ON (A.iddepto = C.iddepto) GROUP BY C.nomdepto";
+  return Query($query);
 }
