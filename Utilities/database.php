@@ -227,3 +227,90 @@ function Load_All_Departament(){
   "ventas.departamento C ON (A.iddepto = C.iddepto) GROUP BY C.nomdepto";
   return Query($query);
 }
+/*
+Access
+*/
+
+function Validate_user($post, $id_session){
+  $email = $post['email'];
+  $passwd = $post['passwd'];
+  $query = "SELECT * FROM ventas.users WHERE email='$email'";
+  $res = Query($query);
+  if($res){
+    $pwd = $res[0]['passwd'];
+    if(password_verify($passwd, $pwd)){
+        $sentence = "UPDATE ventas.users SET id_session= '$id_session' WHERE email= '$email'";
+        $result = Execute($sentence);
+      return 1;
+    }else return 0;
+  }else return 0;
+}
+
+function Validate_Option(){
+    if(!isset($_SESSION)) session_start();
+    $idSess = session_id();
+    $email = $_SESSION['email'];
+    $query = "SELECT id_session FROM ventas.users WHERE email = '$email'";
+    $res = Query($query);
+
+    $sess = $res[0]['id_session'];
+    if($res == $idSess) return 1;
+    else return "";
+}
+
+function insert_USR($post){
+    $email = $post['corru'];
+    $name = $post['nameu'];
+    $passwd = $post['contu'];
+    $passwdenc = password_hash($passwd,PASSWORD_DEFAULT);
+    $sentence = "INSERT INTO ventas.users(email, username, passwd) VALUES('$email', '$name', '$passwdenc')";
+    $ok = Execute($sentence);
+    return $ok;
+}
+/*
+    Reports-TCPDF
+*/
+function rptVtasXRegion($id_region){
+    $query = "SELECT nomreg, nomsuc, nomcte, sum(importe) total
+    FROM ventas.region A INNER JOIN ventas.sucursal B ON (A.idreg = B.idreg)
+    INNER JOIN ventas.cliente C ON (B.idsuc = C.idsuc)
+    INNER JOIN ventas.venta D ON (C.idcte = D.idcte)
+    INNER JOIN ventas.detalleventa E ON (D.foliovta = E.foliovta)
+    WHERE A.idreg = $id_region    
+    GROUP BY nomreg, nomsuc, nomcte";
+    return Query($query);
+}
+
+/*
+Validar  palabras reservadas
+trin elimina espacios ya sea al final o al priuncipio
+stripslashes agrega un slash mas para anular el ingresado
+*/
+function val_input($data){
+    $data = trim($data);
+    $data = str_replace("'", "", $data);
+    $data = str_replace("select", "", $data);
+    $data = str_replace("SELECT", "", $data);
+    $data = str_replace("Select", "", $data);
+    $data = str_replace("drop", "", $data);
+    $data = str_replace("Drop", "", $data);
+    $data = str_replace("DROP", "", $data);
+    $data = str_replace("delete", "", $data);
+    $data = str_replace("DELETE", "", $data);
+    $data = str_replace("Delete", "", $data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+/*
+function rptAllRegion(){
+    $query= "Select nomreg, nomsuc, nomcte, sum(importe)
+    From ventas.region A Inner Join ventas.sucursal B ON (A.idreg = B.idreg)
+        inner Join ventas.cliente C ON (B.idsuc = C.idsuc)
+        Inner join ventas.venta D ON (C.idcte = D.idcte)
+        Inner Join ventas.detalleventa E ON (D.foliovta = E.foliovta)
+        Group By nomreg, nomsuc, nomcte"
+}
+*/
+
