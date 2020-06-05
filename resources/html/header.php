@@ -1,33 +1,35 @@
 ﻿<?php
     if  (!isset($_SESSION)){
       session_start();
-      $corr = "";
+      $email = "";
     }
-    $corr = isset($_SESSION["correo"])?$_SESSION["correo"]:"";
-    $idSess = session_id();
+    $email = isset($_SESSION["email"])?$_SESSION["email"]:"";
+    $id_session = session_id();
 ?>
 <header>
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="../Menu/">Menus</a></li>
-  <li><a href="../Rol/">Rol</a></li>
-  <li><a href="../Usuario/">Usuario</a></li>
+  <li><a href="../region/">Regions</a></li>
+  <li><a href="../Sucursal/">Sucursal</a></li>
+  <li><a href="../departament/">Departament</a></li>
   <li class="divider"></li>
-  <li><a href="../Perfil/">Perfil</a></li>
+  <li><a href="../product/">Products</a></li>
 </ul>
 <nav class="indigo darken-4">
   <div class="nav-wrapper">
     <a href="../Home/" class="brand-logo">Logo</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="../clasif/">Clasificación</a></li>
-      <li><a href="../Empleado/">Empleado</a></li>
+      <li><a href="../region/">Regions</a></li>
+      <li><a href="../Sucursal/">Sucursal</a></li>
+      <li><a href="../departament/">Departament</a></li>
+      <li><a href="../product/">Products</a></li>
       <!-- Dropdown Trigger -->
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Administración<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catalogos<i class="material-icons right">arrow_drop_down</i></a></li>
       <?php
-          if ($corr == "")
-             echo "<li><a href='../Acceso/''>Iniciar sesión</a></li>";
+          if ($email == "")
+             echo "<li><a href='../Access/''>Sing in</a></li>";
           else
-             echo "<li><a href='../Acceso/destruir.php>$corr(Cerrar)</a></li>";
+             echo "<li><a href='../Access/logout.php''>$email(Log out)</a></li>";
       ?>
     </ul>
   </div>

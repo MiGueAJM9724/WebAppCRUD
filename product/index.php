@@ -14,7 +14,12 @@
 <body>
 <!-- La siguiente linea importa un programa de php el cual incluye un menu
   de tipo NavBar de Materialize y corresponde al Header de la página-->
-<?php include_once("../resources/html/header.php"); ?>
+<?php
+    include_once("../Utilities/database.php"); 
+    $res = Validate_Option();
+    if($res == "") header("location:../Access");
+    else include_once("../resources/html/header.php");
+?>
 
 <!-- Colocar su código a partir de este comentario -->
 <div class="container">
